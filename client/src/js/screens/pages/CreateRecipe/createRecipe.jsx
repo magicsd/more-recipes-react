@@ -378,6 +378,7 @@ class CreateRecipe extends Component {
   render() {
     let createButton = (
       <button
+        data-testId="recipePublish"
         className="btn btn-primary btn-lg"
         onClick={this.handleSubmit}
       >
@@ -428,7 +429,7 @@ class CreateRecipe extends Component {
         multiple={false}
         style={dropZoneStyles}
       >
-        <div className="upload-recipe-img">
+        <div data-testId="uploadImage" className="upload-recipe-img">
           <div className="row justify-content-center">
             <div className="col-12">
               <p className="text-center">
@@ -480,6 +481,7 @@ class CreateRecipe extends Component {
       <li key={index} className="list-group-item wow fadeIn">
         <div className="input-group">
           <input
+            data-testId={`recipeIngredient-${index}`}
             className="form-control"
             placeholder="50 Naira Garri"
             type="text"
@@ -490,6 +492,7 @@ class CreateRecipe extends Component {
           />
           <span className="input-group-btn">
             <button
+              data-testId={`recipeIngredient-${index}-trash`}
               className="btn btn-primary"
               type="button"
               onClick={() => { this.removeIngredient(index); }}
@@ -510,6 +513,7 @@ class CreateRecipe extends Component {
           <div className="col-11">
             <div className="input-group">
               <input
+                data-testId={`recipeProcedure-${index}`}
                 className="form-control"
                 value={this.state.procedure[index]}
                 onBlur={(event) => { this.validateInput(event, index); }}
@@ -519,7 +523,12 @@ class CreateRecipe extends Component {
                 type="text"
               />
               <span className="input-group-btn">
-                <button className="btn btn-primary" type="button" onClick={() => { this.removeProcedure(index); }}>
+                <button
+                  data-testId={`recipeProcedure-${index}-trash`}
+                  className="btn btn-primary"
+                  type="button"
+                  onClick={() => { this.removeProcedure(index); }}
+                >
                   <i className="ion ion-trash-b" style={{ color: 'white' }} />
                 </button>
               </span>
@@ -583,15 +592,15 @@ class CreateRecipe extends Component {
                 <div className="card-body">
                   <div className="form-group row">
                     <div className="col-sm-8">
-                      <input className="form-control" id="recipeTitle" onBlur={this.validateInput} name="title" value={this.state.title} onChange={this.handleInputChange} placeholder="Recipe title ..." type="text" />
+                      <input data-testId="recipeTitle" className="form-control" id="recipeTitle" onBlur={this.validateInput} name="title" value={this.state.title} onChange={this.handleInputChange} placeholder="Recipe title ..." type="text" />
                       {titleErrors}
                     </div>
                     <div className="col-sm-4">
-                      <input className="form-control" onBlur={this.validateInput} placeholder="How long to cook ?" value={this.state.timeToCook} onChange={this.handleInputChange} type="text" name="timeToCook" />
+                      <input data-testId="recipeTimeToCook" className="form-control" onBlur={this.validateInput} placeholder="How long to cook ?" value={this.state.timeToCook} onChange={this.handleInputChange} type="text" name="timeToCook" />
                       {timeToCookErrors}
                     </div>
                   </div>
-                  <textarea name="description" value={this.state.description} onBlur={this.validateInput} onChange={this.handleInputChange} placeholder="Tell the world about your recipe ..." cols={3} rows={3} className="form-control" />
+                  <textarea data-testId="recipeDescription" name="description" value={this.state.description} onBlur={this.validateInput} onChange={this.handleInputChange} placeholder="Tell the world about your recipe ..." cols={3} rows={3} className="form-control" />
                   {descriptionErrors}
                   <hr />
                   <h3 className="text-muted mb-3 mt-3">
@@ -602,7 +611,13 @@ class CreateRecipe extends Component {
                   <ul className="list-group">
                     {ingredientList}
                   </ul>
-                  <button className="btn btn-xs mt-2 btn-primary" onClick={this.addNewIngredient}>Add ingredient</button>
+                  <button
+                    data-testId="recipeAddIngredient"
+                    className="btn btn-xs mt-2 btn-primary"
+                    onClick={this.addNewIngredient}
+                  >
+                    Add ingredient
+                  </button>
                   <h3 className="text-muted mb-3 mt-3">
                     <span className="mr-4">Procedure</span>
                   </h3>
@@ -610,7 +625,13 @@ class CreateRecipe extends Component {
                   <ul className="list-group">
                     {procedureList}
                   </ul>
-                  <button className="btn btn-xs mt-2 btn-primary" onClick={this.addNewProcedureStep}>Add procedure step</button>
+                  <button
+                    data-testId="recipeAddProcedure"
+                    className="btn btn-xs mt-2 btn-primary"
+                    onClick={this.addNewProcedureStep}
+                  >
+                    Add procedure step
+                  </button>
                   <br />
                   <br />
                   <p className="text-center">

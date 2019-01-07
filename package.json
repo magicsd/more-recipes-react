@@ -10,7 +10,7 @@
     "babel-node": "babel-node --",
     "nightwatch": "nightwatch",
     "test:e2e": "cypress open",
-    "build": "./node_modules/.bin/babel server/ -d build --copy-files",
+    "build:server": "./node_modules/.bin/babel server/ -d build --copy-files",
     "dist": "./node_modules/.bin/babel server/ -d dist --presets=babili",
     "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls",
     "migrate:refresh": "./node_modules/.bin/sequelize db:migrate:undo:all && ./node_modules/.bin/sequelize db:migrate",

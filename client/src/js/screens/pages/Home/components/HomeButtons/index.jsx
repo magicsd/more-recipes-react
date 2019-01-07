@@ -26,7 +26,11 @@ const HomeButtons = ({ isAuthenticated, authUser }) => ((
     {
       isAuthenticated &&
       <span>
-        <Link to="/recipes/create" className="btn btn-primary btn-lg mr-2">
+        <Link
+          data-testId="createRecipeHome"
+          to="/recipes/create"
+          className="btn btn-primary btn-lg mr-2"
+        >
           Create recipe
         </Link>
         <Link
