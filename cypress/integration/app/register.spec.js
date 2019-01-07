@@ -1,10 +1,9 @@
+import { BASE_URL } from '../../constants';
 import faker from 'faker';
-
-const baseUrl = 'http://localhost:5678/';
 
 describe('Registration Process', () => {
   it('Should register a new user', () => {
-    cy.visit(baseUrl);
+    cy.visit(BASE_URL);
     cy.get('[href="/auth/register"]').click();
 
     const fakeUser = {
@@ -19,7 +18,7 @@ describe('Registration Process', () => {
     cy.get('input[name="confirmPassword"]').type(fakeUser.password);
     cy.get('.btn').click();
 
-    cy.url().should('equal', baseUrl);
+    cy.url().should('equal', `${BASE_URL}/`);
 
     cy.get('span > .mr-2').should('have.text', 'Create recipe');
   });

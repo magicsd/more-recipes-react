@@ -1,20 +1,6 @@
-import faker from 'faker';
-
-const baseUrl = 'http://localhost:5678';
-
-const generateRecipe = () => ({
-  title: faker.lorem.sentence(),
-  description: faker.lorem.sentences(3),
-  timeToCook: faker.random.number(),
-  ingredients: [faker.lorem.sentence(), faker.lorem.sentence()],
-  procedure: [faker.lorem.sentence(), faker.lorem.sentence()],
-});
-
-const generateUser = () => ({
-  name: faker.name.findName(),
-  email: faker.internet.email(),
-  password: faker.internet.password(),
-});
+import { BASE_URL } from '../../constants';
+import { generateUser, generateRecipe } from '../../utils/generate';
+import { createUser } from '../../utils/create';
 
 describe('Recipe Creation Process', () => {
   let fakeUser;
@@ -22,7 +8,7 @@ describe('Recipe Creation Process', () => {
   beforeEach(() => {
     fakeUser = generateUser();
 
-    cy.request('POST', `${baseUrl}/api/v1/users/signup`, fakeUser)
+    createUser(fakeUser)
       .then(({ body }) => {
         cy.window().then(window => {
           window.localStorage.setItem('authUser', JSON.stringify(body));
@@ -31,7 +17,7 @@ describe('Recipe Creation Process', () => {
   });
 
   it('Should create a recipe for the user', () => {
-    cy.visit(baseUrl);
+    cy.visit(BASE_URL);
 
     cy.get('[data-testid=createRecipeHome]').click();
 
